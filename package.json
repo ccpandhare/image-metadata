@@ -1,0 +1,25 @@
+{
+  "name": "image-metadata",
+  "version": "0.0.0",
+  "description": "image-metadata reads the entire image metadata",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccpandhare/image-metadata.git"
+  },
+  "keywords": [
+    "Image",
+    "Metadata",
+    "Processing",
+    "Metadata"
+  ],
+  "author": "ccpandhare",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ccpandhare/image-metadata/issues"
+  },
+  "homepage": "https://github.com/ccpandhare/image-metadata#readme"
+}
