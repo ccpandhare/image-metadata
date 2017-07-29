@@ -1,6 +1,6 @@
 var getHex = require('./GetHex');
 var getType = require('./GetType');
-var parseJPEG = require('./ParseJPEG');
+var parseJPEG = require('./JPEG/ParseJPEG');
 
 module.exports = function ImageMetadata(file) {
 

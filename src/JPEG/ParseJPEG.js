@@ -1,5 +1,3 @@
-var componentID = ['Y','Cb','Cr','I','Q']
-
 function makeFragments(hex,callback) {
   var fragments = {};
   var fragment;
@@ -30,30 +28,24 @@ function analyseFragments(fragments,callback) {
 
   /**** SOF0 :: 0xFFC0 Marker Fragment ****/
   if (fragments.hasOwnProperty('ffc0')) {
-    var SOF0 = fragments.ffc0[0];
-    metadata.height = parseInt(SOF0.substr(10,4),16);
-    metadata.width = parseInt(SOF0.substr(14,4),16);
-    metadata.components = {
-      number: parseInt(SOF0.substr(18,2),16),
-      colorspace: ""
-    };
-    for (var i = 1; i <= metadata.components.number; i++) {
-      var component = SOF0.substr(20+6*(i-1),6);
-      metadata.components['component'+i] = {
-        ID: parseInt(component.substr(0,2),16),
-        name: componentID[parseInt(component.substr(0,2),16) - 1],
-        samplingFactorVertical: parseInt(component.substr(2,1),16),
-        samplingFactorHorizontal: parseInt(component.substr(3,1),16),
-        quantizationTableNumber: parseInt(component.substr(4,2),16)
-      }
-      metadata.components.colorspace += metadata.components['component'+i].name;
-    }
+    require('./SOF0')(fragments.ffc0)
+      .then(obj=>{
+        Object.assign(metadata,obj)
+      })
+      .catch(err=>{
+        console.error(err);
+      });
   }
 
   /**** APP0 :: 0xFFE0 Marker Fragment ****/
-  metadata.JFIF
-  if (fragments.hasOwnProperty('ffc0')) {
-    var APP0 = fragments.ffe0[0];
+  if (fragments.hasOwnProperty('ffe0')) {
+    require('./JFIF')(fragments.ffe0)
+      .then(obj=>{
+        Object.assign(metadata,obj)
+      })
+      .catch(err=>{
+        console.error(err);
+      });
   }
 
   callback(metadata)
