@@ -48,6 +48,17 @@ function analyseFragments(fragments,callback) {
       });
   }
 
+  /**** APP1(Exif) :: 0xFFE1 Marker Fragment ****/
+  if (fragments.hasOwnProperty('ffe1')) {
+    require('./EXIF')(fragments.ffe1)
+      .then(obj=>{
+        Object.assign(metadata,obj)
+      })
+      .catch(err=>{
+        console.error(err);
+      });
+  }
+
   callback(metadata)
 }
 
