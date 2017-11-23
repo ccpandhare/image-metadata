@@ -13,11 +13,12 @@ module.exports = function SOF0(ffe1) {
         continue;
 
       // Endianness must be II(little endian) or MM (big endian)
-      if( fragment.substr(20,4) != "4949" && fragment.substr(20,4) != "4d4d" )
+      var encoding = fragment.substr(20,4).toLowerCase();
+      if( encoding != "4949" && encoding != "4d4d" )
         continue;
 
       // Signature Byte
-      if( parseInt(fragment.substr(24,2),16) != 42 )
+      if( fragment.substr(24,4) != "2a00" && fragment.substr(24,4) != "002a" )
         continue;
 
       // Else identify JFIF as Valid
